@@ -18,7 +18,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        type: [ macos, windows, linux ]
+        type: [ macos, windows ]
     steps:
       - uses: actions/checkout@v2
       - run: make build-${{ matrix.type }}
