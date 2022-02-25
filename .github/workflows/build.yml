@@ -16,13 +16,21 @@ on:
 jobs:
   macos:
     runs-on: ubuntu-latest
+    # Build 3 seprate jobs, one for windows, linux and macos
     strategy:
       matrix:
-        type: [ macos, windows ]
+        type: [ macos, windows, linux ]
     steps:
       - uses: actions/checkout@v2
+      # Run the Makefile command to build for the running type
       - run: make build-${{ matrix.type }}
       - uses: actions/upload-artifact@v2
         with:
           name: ${{ matrix.type }}
-          path: ${{ matrix.type }}.zip
+          path: ${{ matrix.type }}-lethean.tar
+      # if this is a tag build, upload
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          files: ${{ matrix.type }}-lethean.tar
