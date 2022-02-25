@@ -18,7 +18,7 @@ build-base:
 
 build-windows: build-base windows-cli windows-server windows-gui apply-perms
 	cp -r ./windows/* ./build/
-	cd build && zip -m9r ../windows.zip ./
+	cd build && zip -m9r ../windows-lethean.zip ./
 
 build-linux: build-base linux-cli linux-server linux-gui apply-perms
 	cp -r ./linux-macos/* ./build/
