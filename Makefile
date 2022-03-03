@@ -1,30 +1,23 @@
-WINDOWS_CLI=https://github.com/letheanVPN/blockchain/releases/download/v4.0.4/lethean-4.0.4-windows.zip
-LINUX_CLI=https://github.com/letheanVPN/blockchain/releases/download/v4.0.4/lethean-4.0.4-linux.zip
-MACOS_CLI=https://github.com/letheanVPN/blockchain/releases/download/v4.0.4/lethean-4.0.4-macOS.zip
+VERSION_CLI=v4.0.4
+VERSION_GUI=v4.0.4
+VERSION_SERVER=v2.0.1
 
-WINDOWS_SERVER=https://github.com/letheanVPN/lethean-server/releases/download/v2.0.1/windows-lethean-server.exe
-LINUX_SERVER=https://github.com/letheanVPN/lethean-server/releases/download/v2.0.1/linux-lethean-server
-MACOS_SERVER=https://github.com/letheanVPN/lethean-server/releases/download/v2.0.1/macos-lethean-server
 
-WINDOWS_GUI=https://github.com/letheanVPN/desktop/releases/download/v4.0.4/windows-lethean-desktop.zip
-LINUX_GUI=https://github.com/letheanVPN/desktop/releases/download/v4.0.4/linux-lethean-desktop.tar
-MACOS_GUI=https://github.com/letheanVPN/desktop/releases/download/v4.0.4/macos-lethean-desktop.tar
 
-all:
-	echo "read the file"
+all: help
 
 build-base:
 	mkdir -p build/conf build/wallets build/users build/data/objects
 
-build-windows: build-base windows-cli windows-server windows-gui apply-perms
+build-windows: build-base windows-cli windows-server windows-gui apply-perms ## Builds Windows Download package
 	cp -r ./windows/* ./build/
 	cd build && zip -m9r ../windows-lethean.zip ./
 
-build-linux: build-base linux-cli linux-server linux-gui apply-perms
+build-linux: build-base linux-cli linux-server linux-gui apply-perms ## Builds Linux Download package
 	cp -r ./linux-macos/* ./build/
 	cd build && tar -zcvf ../linux-lethean.tar ./
 
-build-macos: build-base macos-cli macos-server macos-gui apply-perms
+build-macos: build-base macos-cli macos-server macos-gui apply-perms ## Builds Macos Download package
 	cp -r ./linux-macos/* ./build/
 	cd build && tar -zcvf ../macos-lethean.tar ./
 
@@ -34,38 +27,47 @@ apply-perms:
 sign-macos:
 	codesign -s 'Developer ID Application: Lethean LTD (W2DNA5L5DY)' --no-strict **/lethean* || true
 
-windows-cli:
-	wget ${WINDOWS_CLI}
-	unzip -j lethean-4.0.4-windows.zip  -d ./build/cli/ -x **/._*
-	rm lethean-4.0.4-windows.zip
+windows-cli: ## Download Windows CLI
+	[ -f ./build/cli/letheand.exe ] || mkdir -p build/cli && wget https://github.com/letheanVPN/blockchain/releases/download/${VERSION_CLI}/lethean-4.0.4-windows.zip && unzip -j lethean-4.0.4-windows.zip  -d ./build/cli/ -x **/._* && rm lethean-4.0.4-windows.zip;
 
-linux-cli:
-	wget ${LINUX_CLI}
-	unzip -j lethean-4.0.4-linux.zip  -d ./build/cli/ -x **/._*
-	rm lethean-4.0.4-linux.zip
+linux-cli:  ## Download Linux CLI
+	[ -f ./build/cli/letheand ] || mkdir -p build/cli && wget https://github.com/letheanVPN/blockchain/releases/download/${VERSION_CLI}/lethean-4.0.4-linux.zip && unzip -j lethean-4.0.4-linux.zip  -d ./build/cli/ -x **/._* && rm lethean-4.0.4-linux.zip
 
-macos-cli:
-	wget ${MACOS_CLI}
-	unzip -j lethean-4.0.4-macOS.zip  -d ./build/cli/ -x **/._*
-	rm lethean-4.0.4-macOS.zip
+macos-cli:  ## Download macOS CLI
+	[ -f ./build/cli/letheand ] || mkdir -p build/cli && wget https://github.com/letheanVPN/blockchain/releases/download/${VERSION_CLI}/lethean-4.0.4-macOS.zip && unzip -j lethean-4.0.4-macOS.zip  -d ./build/cli/ -x **/._* && rm lethean-4.0.4-macOS.zip;
 
 windows-gui:
-	cd build && wget ${WINDOWS_GUI} && unzip windows-lethean-desktop.zip && rm windows-lethean-desktop.zip
+	cd build && wget https://github.com/letheanVPN/desktop/releases/download/${VERSION_GUI}/windows-lethean-desktop.zip && unzip windows-lethean-desktop.zip && rm windows-lethean-desktop.zip
 
 windows-server:
-	cd build && wget ${WINDOWS_SERVER} && mv windows-lethean-server.exe lethean-server.exe
+	cd build && wget https://github.com/letheanVPN/lethean-server/releases/download/${VERSION_SERVER}/windows-lethean-server.exe && mv windows-lethean-server.exe lethean-server.exe
 
 linux-gui:
-	cd build && wget ${LINUX_GUI} && tar -xvf linux-lethean-desktop.tar && rm linux-lethean-desktop.tar
+	cd build && wget https://github.com/letheanVPN/desktop/releases/download/${VERSION_GUI}/linux-lethean-desktop.tar && tar -xvf linux-lethean-desktop.tar && rm linux-lethean-desktop.tar
 
 linux-server:
-	cd build && wget ${LINUX_SERVER} &&  mv linux-lethean-server lethean-server
+	cd build && wget https://github.com/letheanVPN/lethean-server/releases/download/${VERSION_SERVER}/linux-lethean-server &&  mv linux-lethean-server lethean-server
 
 macos-server:
-	cd build && wget ${MACOS_SERVER} &&  mv macos-lethean-server lethean-server
+	cd build && wget https://github.com/letheanVPN/lethean-server/releases/download/${VERSION_SERVER}/macos-lethean-server &&  mv macos-lethean-server lethean-server
 
 macos-gui:
-	cd build && wget ${MACOS_GUI} && tar -xvf macos-lethean-desktop.tar && rm macos-lethean-desktop.tar
+	cd build && wget https://github.com/letheanVPN/desktop/releases/download/${VERSION_GUI}/macos-lethean-desktop.tar && tar -xvf macos-lethean-desktop.tar && rm macos-lethean-desktop.tar
+
+
+start-chain:
+	./build/cli/letheand --data-dir $(shell pwd)/data
+
+export-chain:
+	./build/cli/lethean-blockchain-export --data-dir $(shell pwd)/data
+
+import-chain:
+	./build/cli/lethean-blockchain-import --data-dir $(shell pwd)/data
+
+help: ## Show this help
+	@egrep -h '\s##\s' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m make %-30s\033[0m %s\n", $$1, $$2}'
 
 clean:
 	rm -rf build
+
+.PHONY: help all clean
