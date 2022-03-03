@@ -59,7 +59,7 @@ start-chain:
 	./build/cli/letheand --data-dir $(shell pwd)/data
 
 start-chain-full:
-	./build/cli/letheand --data-dir $(shell pwd)/data --confirm-external-bind --rpc-bind-ip 0.0.0.0
+	./build/cli/letheand --data-dir $(shell pwd)/data --confirm-external-bind --rpc-bind-ip 0.0.0.0 --detach
 
 export-chain:
 	./build/cli/lethean-blockchain-export --output-file $(shell pwd)/data/export/blockchain.raw
