@@ -59,10 +59,10 @@ start-chain:
 	./build/cli/letheand --data-dir $(shell pwd)/data
 
 export-chain:
-	./build/cli/lethean-blockchain-export --data-dir $(shell pwd)/data
+	./build/cli/lethean-blockchain-export --output-file $(shell pwd)/data/export/blockchain.raw
 
 import-chain:
-	./build/cli/lethean-blockchain-import --data-dir $(shell pwd)/data
+	./build/cli/lethean-blockchain-import --input-file $(shell pwd)/data/export/blockchain.raw --prep-blocks-threads 1 --batch-size 1000
 
 help: ## Show this help
 	@egrep -h '\s##\s' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m make %-30s\033[0m %s\n", $$1, $$2}'
