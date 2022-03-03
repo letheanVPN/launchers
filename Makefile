@@ -2,13 +2,13 @@ WINDOWS_CLI=https://github.com/letheanVPN/blockchain/releases/download/v4.0.4/le
 LINUX_CLI=https://github.com/letheanVPN/blockchain/releases/download/v4.0.4/lethean-4.0.4-linux.zip
 MACOS_CLI=https://github.com/letheanVPN/blockchain/releases/download/v4.0.4/lethean-4.0.4-macOS.zip
 
-WINDOWS_SERVER=https://github.com/letheanVPN/launchers/releases/download/server/windows.zip
-LINUX_SERVER=https://github.com/letheanVPN/launchers/releases/download/server/linux.zip
-MACOS_SERVER=https://github.com/letheanVPN/launchers/releases/download/server/macos-intel.zip
+WINDOWS_SERVER=https://github.com/letheanVPN/lethean-server/releases/download/v2.0.1/windows-lethean-server.exe
+LINUX_SERVER=https://github.com/letheanVPN/lethean-server/releases/download/v2.0.1/linux-lethean-server
+MACOS_SERVER=https://github.com/letheanVPN/lethean-server/releases/download/v2.0.1/macos-lethean-server
 
-WINDOWS_GUI=https://github.com/letheanVPN/desktop/releases/download/v4.0.3/windows-lethean-desktop.zip
-LINUX_GUI=https://github.com/letheanVPN/desktop/releases/download/v4.0.3/linux-lethean-desktop.tar
-MACOS_GUI=https://github.com/letheanVPN/desktop/releases/download/v4.0.3/macos-lethean-desktop.tar
+WINDOWS_GUI=https://github.com/letheanVPN/desktop/releases/download/v4.0.4/windows-lethean-desktop.zip
+LINUX_GUI=https://github.com/letheanVPN/desktop/releases/download/v4.0.4/linux-lethean-desktop.tar
+MACOS_GUI=https://github.com/letheanVPN/desktop/releases/download/v4.0.4/macos-lethean-desktop.tar
 
 all:
 	echo "read the file"
@@ -53,16 +53,16 @@ windows-gui:
 	cd build && wget ${WINDOWS_GUI} && unzip windows-lethean-desktop.zip && rm windows-lethean-desktop.zip
 
 windows-server:
-	cd build && wget ${WINDOWS_SERVER} && unzip windows.zip && rm windows.zip
+	cd build && wget ${WINDOWS_SERVER} && mv windows-lethean-server.exe lethean-server.exe
 
 linux-gui:
 	cd build && wget ${LINUX_GUI} && tar -xvf linux-lethean-desktop.tar && rm linux-lethean-desktop.tar
 
 linux-server:
-	cd build && wget ${LINUX_SERVER} && unzip linux.zip && rm linux.zip
+	cd build && wget ${LINUX_SERVER} &&  mv linux-lethean-server lethean-server
 
 macos-server:
-	cd build && wget ${MACOS_SERVER} && unzip macos-intel.zip && rm macos-intel.zip
+	cd build && wget ${MACOS_SERVER} &&  mv macos-lethean-server lethean-server
 
 macos-gui:
 	cd build && wget ${MACOS_GUI} && tar -xvf macos-lethean-desktop.tar && rm macos-lethean-desktop.tar
