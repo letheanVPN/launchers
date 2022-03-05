@@ -21,11 +21,11 @@ build-macos: build-base macos-cli macos-amd64-server macos-gui apply-perms ## Bu
 	cp -r ./linux-macos/* ./build/
 	cd build && tar -zcvf ../macos-lethean.tar ./
 
-build-macos-arm64: build-base macos-cli macos-arm64-server macos-arm64-gui apply-perms ## Builds Macos Download package
+build-macos-arm64: build-base macos-cli macos-arm64-server macos-gui apply-perms ## Builds Macos Download package
 	cp -r ./linux-macos/* ./build/
 	cd build && tar -zcvf ../macos-arm64-lethean.tar ./
 
-build-macos-amd64: build-base macos-cli macos-amd64-server macos-amd64-gui apply-perms ## Builds Macos Download package
+build-macos-amd64: build-base macos-cli macos-amd64-server macos-gui apply-perms ## Builds Macos Download package
 	cp -r ./linux-macos/* ./build/
 	cd build && tar -zcvf ../macos-amd64-lethean.tar ./
 
@@ -65,11 +65,6 @@ macos-arm64-server:
 macos-gui:
 	cd build && wget https://github.com/letheanVPN/desktop/releases/download/v${VERSION_GUI}/macos-lethean-desktop.tar && tar -xvf macos-lethean-desktop.tar && rm macos-lethean-desktop.tar
 
-macos-amd64-gui:
-	cd build && wget https://github.com/letheanVPN/desktop/releases/download/v${VERSION_GUI}/macos-amd64-lethean-desktop.tar && tar -xvf macos-amd64-lethean-desktop.tar && rm macos-amd64-lethean-desktop.tar
-
-macos-arm64-gui:
-	cd build && wget https://github.com/letheanVPN/desktop/releases/download/v${VERSION_GUI}/macos-arm64-lethean-desktop.tar && tar -xvf macos-arm64-lethean-desktop.tar && rm macos-arm64-lethean-desktop.tar
 
 start-chain:
 	./build/cli/letheand --data-dir $(shell pwd)/data
