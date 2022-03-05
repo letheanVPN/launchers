@@ -9,23 +9,23 @@ all: help
 build-base: clean
 	mkdir -p build/conf build/wallets build/users build/data/objects
 
-build-windows: build-base windows-cli windows-server windows-gui apply-perms ## Builds Windows Download package
+build-windows: build-base windows-cli windows-server windows-gui apply-perms
 	cp -r ./windows/* ./build/
 	cd build && zip -m9r ../windows-lethean.zip ./
 
-build-linux: build-base linux-cli linux-server linux-gui apply-perms ## Builds Linux Download package
+build-linux: build-base linux-cli linux-server linux-gui apply-perms
 	cp -r ./linux-macos/* ./build/
 	cd build && tar -zcvf ../linux-lethean.tar ./
 
-build-macos: build-base macos-cli macos-amd64-server macos-gui apply-perms ## Builds Macos Download package
+build-macos: build-base macos-cli macos-amd64-server macos-gui apply-perms
 	cp -r ./linux-macos/* ./build/
 	cd build && tar -zcvf ../macos-lethean.tar ./
 
-build-macos-arm64: build-base macos-cli macos-arm64-server macos-gui apply-perms ## Builds Macos Download package
+build-macos-arm64: build-base macos-cli macos-arm64-server macos-gui apply-perms
 	cp -r ./linux-macos/* ./build/
 	cd build && tar -zcvf ../macos-arm64-lethean.tar ./
 
-build-macos-amd64: build-base macos-cli macos-amd64-server macos-gui apply-perms ## Builds Macos Download package
+build-macos-amd64: build-base macos-cli macos-amd64-server macos-gui apply-perms
 	cp -r ./linux-macos/* ./build/
 	cd build && tar -zcvf ../macos-amd64-lethean.tar ./
 
@@ -66,19 +66,19 @@ macos-gui:
 	cd build && wget https://github.com/letheanVPN/desktop/releases/download/v${VERSION_GUI}/macos-lethean-desktop.tar && tar -xvf macos-lethean-desktop.tar && rm macos-lethean-desktop.tar
 
 
-start-chain:
+start-chain: ## Start letheand
 	./build/cli/letheand --data-dir $(shell pwd)/data
 
-start-chain-full:
+start-chain-full: ## Start Public letheand Node (with RPC)
 	./build/cli/letheand --data-dir $(shell pwd)/data --confirm-external-bind --rpc-bind-ip 0.0.0.0 --detach
 
-export-chain:
+export-chain: ## Export chain data to raw
 	./build/cli/lethean-blockchain-export --data-dir $(shell pwd)/data --output-file $(shell pwd)/data/export/blockchain.raw
 
-import-chain:
+import-chain: ## Import raw chain data
 	./build/cli/lethean-blockchain-import --data-dir $(shell pwd)/data --input-file $(shell pwd)/data/export/blockchain.raw --prep-blocks-threads 1 --batch-size 1000
 
-rsync-export:
+rsync-export: ## Rsync chain export bootstrap
 	rsync --progress -rd rsync://seed.lethean.io:12000/export/blockchain.raw $(shell pwd)/data/export/blockchain.raw
 
 help: ## Show this help
