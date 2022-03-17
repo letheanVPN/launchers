@@ -19,7 +19,7 @@ jobs:
     # Build 3 seprate jobs, one for windows, linux and macos
     strategy:
       matrix:
-        type: [ macos, macos-arm64, macos-amd64, windows, linux ]
+        type: [ macos, macos-arm64, windows, linux ]
     steps:
       - uses: actions/checkout@v2
       # Run the Makefile command to build for the running type
