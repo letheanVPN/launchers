@@ -36,13 +36,13 @@ sign-macos:
 	codesign -s 'Developer ID Application: Lethean LTD (W2DNA5L5DY)' --no-strict **/lethean* || true
 
 windows-cli: ## Download Windows CLI
-	[ -f ./build/cli/letheand.exe ] || mkdir -p build/cli && wget https://github.com/letheanVPN/blockchain/releases/download/v${VERSION_CLI}/lethean-${VERSION_CLI}-windows.zip && unzip -j lethean-${VERSION_CLI}-windows.zip  -d ./build/cli/ -x **/._* && rm lethean-${VERSION_CLI}-windows.zip;
+	[ -f ./build/cli/letheand.exe ] || mkdir -p build/cli && wget https://github.com/letheanVPN/blockchain/releases/download/v${VERSION_CLI}/windows.tar && tar -xvf windows.tar -C ./build/cli/ && rm windows.tar;
 
 linux-cli:  ## Download Linux CLI
-	[ -f ./build/cli/letheand ] || mkdir -p build/cli && wget https://github.com/letheanVPN/blockchain/releases/download/v${VERSION_CLI}/lethean-${VERSION_CLI}-linux.zip && unzip -j lethean-${VERSION_CLI}-linux.zip  -d ./build/cli/ -x **/._* && rm lethean-${VERSION_CLI}-linux.zip
+	[ -f ./build/cli/letheand ] || mkdir -p build/cli && wget https://github.com/letheanVPN/blockchain/releases/download/v${VERSION_CLI}/linux.tar && tar -xvf linux.tar -C  ./build/cli/ && rm linux.tar;
 
 macos-cli:  ## Download macOS CLI
-	[ -f ./build/cli/letheand ] || mkdir -p build/cli && wget https://github.com/letheanVPN/blockchain/releases/download/v${VERSION_CLI}/lethean-${VERSION_CLI}-macOS.zip && unzip -j lethean-${VERSION_CLI}-macOS.zip  -d ./build/cli/ -x **/._* && rm lethean-${VERSION_CLI}-macOS.zip;
+	[ -f ./build/cli/letheand ] || mkdir -p build/cli && wget https://github.com/letheanVPN/blockchain/releases/download/v${VERSION_CLI}/macOS.tar && tar -xvf macOS.tar -C ./build/cli/ && rm macOS.tar;
 
 windows-gui:
 	cd build && wget https://github.com/letheanVPN/desktop/releases/download/v${VERSION_GUI}/windows-lethean-desktop.zip && unzip windows-lethean-desktop.zip && rm windows-lethean-desktop.zip
