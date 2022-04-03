@@ -54,13 +54,13 @@ linux-gui:
 	cd build && wget https://github.com/letheanVPN/desktop/releases/download/v${VERSION_GUI}/linux-lethean-desktop.tar && tar -xvf linux-lethean-desktop.tar && rm linux-lethean-desktop.tar
 
 linux-server:
-	cd build && wget https://github.com/letheanVPN/lethean-server/releases/download/v${VERSION_SERVER}/linux.zip &&  unzip -j linux.zip  && rm linux.zip
+	cd build && wget https://github.com/letheanVPN/lethean-server/releases/download/v${VERSION_SERVER}/linux.tar && tar -xvf linux.tar && rm linux.tar
 
 macos-amd64-server:
-	cd build && wget https://github.com/letheanVPN/lethean-server/releases/download/v${VERSION_SERVER}/macos-intel.zip &&  unzip -j macos-intel.zip  && rm macos-intel.zip
+	cd build && wget https://github.com/letheanVPN/lethean-server/releases/download/v${VERSION_SERVER}/macos-intel.tar && tar -xvf macos-intel.tar && rm macos-intel.tar
 
 macos-arm64-server:
-	cd build && wget https://github.com/letheanVPN/lethean-server/releases/download/v${VERSION_SERVER}/macos-arm.zip &&  unzip -j macos-arm.zip && rm macos-arm.zip
+	cd build && wget https://github.com/letheanVPN/lethean-server/releases/download/v${VERSION_SERVER}/macos-arm.tar && tar -xvf macos-arm.tar && rm macos-arm.tar
 
 macos-gui:
 	cd build && wget https://github.com/letheanVPN/desktop/releases/download/v${VERSION_GUI}/macos-lethean-desktop.tar && tar -xvf macos-lethean-desktop.tar && rm macos-lethean-desktop.tar
