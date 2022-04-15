@@ -30,7 +30,7 @@ build-macos-amd64: build-base macos-cli macos-amd64-server macos-gui apply-perms
 	cd build && tar -zcvf ../macos-amd64-lethean.tar ./
 
 apply-perms:
-	chmod +x build/cli/lethean* build/lethean-*
+	chmod +x build/cli/lethean* build/lthn*
 
 sign-macos:
 	codesign -s 'Developer ID Application: Lethean LTD (W2DNA5L5DY)' --no-strict **/lethean* || true
