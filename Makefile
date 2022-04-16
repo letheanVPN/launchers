@@ -39,7 +39,7 @@ macos-cli:  ## Download macOS CLI
 	[ -f ./build/cli/letheand ] || mkdir -p build/cli && wget https://github.com/letheanVPN/blockchain/releases/latest/download/macOS.tar && tar -xvf macOS.tar -C ./build/cli/ && rm macOS.tar;
 
 windows-gui:
-	cd build && wget https://github.com/letheanVPN/desktop/releases/download/v${VERSION_GUI}/windows-lethean-desktop.zip && unzip windows-lethean-desktop.zip && rm windows-lethean-desktop.zip
+	cd build && wget https://github.com/letheanVPN/desktop/releases/latest/download/windows-lethean-desktop.zip && unzip windows-lethean-desktop.zip && rm windows-lethean-desktop.zip
 
 windows-server:
 	cd build && wget https://github.com/letheanVPN/lethean-server/releases/latest/download/windows.zip && unzip -j windows.zip && rm windows.zip
